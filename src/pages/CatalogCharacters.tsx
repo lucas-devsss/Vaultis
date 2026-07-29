@@ -24,7 +24,7 @@ export function CatalogCharacters() {
   }
 
   return (
-    <div className="grid gap-2.5 grid-cols-8 px-8 ">
+    <div className="grid gap-2.5 grid-cols-[repeat(auto-fit,minmax(150px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] px-8 ">
       {dataState.map((a) => (
         <CardCharacter
           key={a.id}
