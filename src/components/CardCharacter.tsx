@@ -16,17 +16,18 @@ export default function CardCharacter({
   };
 
   return (
-    <article className="min-w-37.5 max-w-50 max-h-149 border-4 bg-slate-800 text-white">
-      <div className="w-50 h-50">
+    <article className=" flex flex-col max-h-166.25 border-4 bg-slate-800 text-white box-border">
+      <div className="w-full min-h-50 shrink-0">
         <img
+          className="w-ful h-full"
           src={image.url.replace("https://www.superherodb.com", "/images")}
           alt={name}
         />
       </div>
-      <div className="p-2.5">
+      <div className="p-2.5 flex flex-col flex-1 min-h-0 box-border justify-between">
         <p className="font-outfit text-center mb-2.5 text-lg">{name}</p>
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-3 flex-wrap">
+        <div className="flex flex-1 flex-col gap-6 justify-between ">
+          <div className="flex flex-col gap-3">
             <div className={alignmentStyles[biography.alignment]}>
               {biography.alignment}
             </div>
@@ -39,7 +40,7 @@ export default function CardCharacter({
                 : appearance.race}
             </div>
           </div>
-          <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col gap-2.5 shrink-0">
             <button className="px-6 py-4 font-bebas text-2xl bg-red-700 border-3 border-transparent duration-150 hover:border-yellow-300 cursor-pointer">
               Recrutar
             </button>
