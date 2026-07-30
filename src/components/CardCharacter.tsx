@@ -1,4 +1,5 @@
 import type { Characters } from "../types/CharacterTypes";
+import BadgeComponent from "./BadgeComponent";
 
 export default function CardCharacter({
   name,
@@ -31,14 +32,14 @@ export default function CardCharacter({
             <div className={alignmentStyles[biography.alignment]}>
               {biography.alignment}
             </div>
-            <div className="border-slate-700 border-2 p-2.5 text-sm text-center">
-              {connections["group-affiliation"].split(/[,;]+/)[0]}
-            </div>
-            <div className="border-slate-700 border-2 p-2.5 text-sm text-center">
-              {appearance.race === "null"
-                ? "Raça desconhecida"
-                : appearance.race}
-            </div>
+            <BadgeComponent
+              content={connections["group-affiliation"].split(/[,;]+/)[0]}
+              unknownContent="Grupo desconhecido"
+            />
+            <BadgeComponent
+              content={appearance.race}
+              unknownContent="Raça desconhecida"
+            />
           </div>
           <div className="flex flex-col gap-2.5 shrink-0">
             <button className="px-6 py-4 font-bebas text-2xl bg-red-700 border-3 border-transparent duration-150 hover:border-yellow-300 cursor-pointer">
