@@ -1,6 +1,6 @@
 import type { Characters } from "../types/CharacterTypes";
 import BadgeComponent from "./BadgeComponent";
-
+import AlignmentBadge from "./AlignmentBadge";
 export default function CardCharacter({
   name,
   id,
@@ -9,13 +9,6 @@ export default function CardCharacter({
   connections,
   appearance,
 }: Characters) {
-  const alignmentStyles = {
-    good: "p-2.5 bg-blue-400 text-center",
-    bad: "p-2.5 bg-red-700 text-center",
-    neutral: "p-2.5 bg-slate-400 text-center",
-    null: "p-2.5 bg-slate-700 text-center",
-  };
-
   return (
     <article className=" flex flex-col max-h-166.25 border-4 bg-slate-800 text-white box-border">
       <div className="w-full min-h-50 shrink-0">
@@ -29,9 +22,10 @@ export default function CardCharacter({
         <p className="font-outfit text-center mb-2.5 text-lg">{name}</p>
         <div className="flex flex-1 flex-col gap-6 justify-between ">
           <div className="flex flex-col gap-3">
-            <div className={alignmentStyles[biography.alignment]}>
-              {biography.alignment}
-            </div>
+            <AlignmentBadge
+              content={biography.alignment}
+              unknownContent={"Status desconhecido"}
+            />
             <BadgeComponent
               content={connections["group-affiliation"].split(/[,;]+/)[0]}
               unknownContent="Grupo desconhecido"
