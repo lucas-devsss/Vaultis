@@ -13,8 +13,10 @@ interface biography {
   placeBirth: string;
   firstAppearance: string;
   publisher: string;
-  alignment: string;
+  alignment: alignment;
 }
+
+export type alignment = "good" | "bad" | "neutral" | "null";
 
 interface image {
   url: string;
