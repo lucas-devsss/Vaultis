@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useFetch() {
+export default function useFetchCharacters() {
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const apiKey = import.meta.env.VITE_API_TOKEN;
