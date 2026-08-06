@@ -36,5 +36,5 @@ export default function useFetchCharacters() {
     }
   }
 
-  return [getFetchCharacters, loading, getFetchMoreCharacters, loadingMore];
+  return { getFetchCharacters, loading, getFetchMoreCharacters, loadingMore };
 }
