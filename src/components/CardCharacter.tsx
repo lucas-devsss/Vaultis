@@ -10,7 +10,7 @@ export default function CardCharacter({
   appearance,
 }: Characters) {
   return (
-    <article className=" flex flex-col max-h-166.25 border-4 bg-slate-800 text-white box-border">
+    <article className=" flex flex-col max-h-166.25  bg-slate-800 text-white box-border">
       <div className="w-full min-h-50 shrink-0">
         <img
           className="w-ful h-full"
