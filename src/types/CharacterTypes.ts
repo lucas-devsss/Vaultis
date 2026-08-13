@@ -18,7 +18,7 @@ interface biography {
 
 export type alignment = "good" | "bad" | "neutral" | "null";
 
-interface image {
+export interface image {
   url: string;
 }
 
