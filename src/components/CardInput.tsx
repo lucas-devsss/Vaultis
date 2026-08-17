@@ -11,7 +11,11 @@ export default function CardInput({ name, image, id }: CardInputProps) {
   return (
     <article className="max-w-225 flex">
       <div className="w-50 min-h-50">
-        <img className="w-ful h-full" src={image.url} alt={name} />
+        <img
+          className="w-ful h-full"
+          src={image.url.replace("https://www.superherodb.com", "/images")}
+          alt={name}
+        />
       </div>
       <div className="flex flex-col gap-2.5 shrink-0">
         <p className="font-outfit text-lg text-white">{name}</p>
