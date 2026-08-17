@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://superheroapi.com/:path*"
+    },
+    {
+      "source": "/images/:path*",
+      "destination": "https://www.superherodb.com/:path*"
     }
   ]
 }
