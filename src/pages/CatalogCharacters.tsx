@@ -63,8 +63,10 @@ export function CatalogCharacters() {
   return (
     <>
       <CatalogHeader />
-      <section className="px-8 bg-slate-900 h-full min-h-dvh">
-        <p className="text-slate-500 font-outfit">Recrutas disponiveis</p>
+      <section className="px-8 pt-40 bg-slate-900 h-full min-h-dvh">
+        <p className="text-slate-500 mb-2.5 font-outfit">
+          Recrutas disponiveis
+        </p>
         <div className="grid gap-2.5 grid-cols-[repeat(auto-fit,minmax(150px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ">
           {charactersData.map((a) => (
             <CardCharacter
