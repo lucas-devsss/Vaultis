@@ -6,12 +6,14 @@ export default function useFetchCharacters() {
   const [searchLoading, setSearchLoading] = useState(false);
   const apiKey = import.meta.env.VITE_API_TOKEN;
 
-  async function getFetchCharacters(range: number) {
+  async function getFetchCharacters() {
     try {
       setLoading(true);
-      const response = await fetch(`api/api.php/${apiKey}/${range}`);
+      const response = await fetch(
+        "https://akabab.github.io/superhero-api/api/all.json",
+      );
       const data = await response.json();
-      if (data.response === "success") {
+      if (data) {
         return data;
       }
     } catch (e) {
