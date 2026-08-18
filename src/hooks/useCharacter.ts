@@ -15,10 +15,9 @@ export default function useCharacter() {
 
   async function getCharacters() {
     if (typeof getFetchCharacters === "function") {
-      const data = await Promise.all(
-        initialC.current.map((id) => getFetchCharacters(id)),
-      );
+      const data = await getFetchCharacters();
       setCharactersData(data);
+      console.log(data);
       setFetched(true);
     }
   }
