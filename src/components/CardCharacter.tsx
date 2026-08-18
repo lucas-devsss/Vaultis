@@ -11,9 +11,9 @@ export default function CardCharacter({
 }: Characters) {
   console.log(id);
   return (
-    <article className=" flex flex-col max-h-166.25  bg-slate-800 text-white box-border">
-      <div className="w-full min-h-50 shrink-0">
-        <img className="w-ful h-full" src={images.lg} alt={name} />
+    <article className=" flex flex-col max-h-175 bg-slate-800 text-white box-border">
+      <div className="w-full max-h-70 shrink-0">
+        <img className="w-full h-full" src={images.md} alt={name} />
       </div>
       <div className="p-2.5 flex flex-col flex-1 min-h-0 box-border justify-between">
         <p className="font-outfit text-center mb-2.5 text-lg">{name}</p>
