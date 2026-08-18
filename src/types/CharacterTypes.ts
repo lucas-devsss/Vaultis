@@ -2,7 +2,7 @@ export interface Characters {
   name: string;
   id: string;
   biography: biography;
-  image: image;
+  images: images;
   connections: connections;
   appearance: appearance;
 }
@@ -18,12 +18,15 @@ interface biography {
 
 export type alignment = "good" | "bad" | "neutral" | "null";
 
-export interface image {
-  url: string;
+export interface images {
+  xs: string;
+  sm: string;
+  md: string;
+  lg: string;
 }
 
 interface connections {
-  "group-affiliation": string;
+  groupAffiliation: string;
 }
 
 interface appearance {
