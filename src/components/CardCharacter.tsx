@@ -5,7 +5,7 @@ export default function CardCharacter({
   name,
   id,
   biography,
-  image,
+  images,
   connections,
   appearance,
 }: Characters) {
@@ -13,11 +13,7 @@ export default function CardCharacter({
   return (
     <article className=" flex flex-col max-h-166.25  bg-slate-800 text-white box-border">
       <div className="w-full min-h-50 shrink-0">
-        <img
-          className="w-ful h-full"
-          src={image.url.replace("https://www.superherodb.com", "/images")}
-          alt={name}
-        />
+        <img className="w-ful h-full" src={images.lg} alt={name} />
       </div>
       <div className="p-2.5 flex flex-col flex-1 min-h-0 box-border justify-between">
         <p className="font-outfit text-center mb-2.5 text-lg">{name}</p>
@@ -28,7 +24,7 @@ export default function CardCharacter({
               unknownContent={"Status desconhecido"}
             />
             <BadgeComponent
-              content={connections["group-affiliation"].split(/[,;]+/)[0]}
+              content={connections["groupAffiliation"].split(/[,;]+/)[0]}
               unknownContent="Grupo desconhecido"
             />
             <BadgeComponent

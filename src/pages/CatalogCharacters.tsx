@@ -74,7 +74,7 @@ export function CatalogCharacters() {
               name={a.name}
               id={a.id}
               biography={a.biography}
-              image={a.image}
+              images={a.images}
               connections={a.connections}
               appearance={a.appearance}
             ></CardCharacter>
