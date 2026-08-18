@@ -1,21 +1,17 @@
-import type { image } from "../types/CharacterTypes";
+import type { images } from "../types/CharacterTypes";
 
 interface CardInputProps {
   name: string;
-  image: image;
+  images: images;
   id: string;
 }
 
-export default function CardInput({ name, image, id }: CardInputProps) {
+export default function CardInput({ name, images, id }: CardInputProps) {
   console.log(id);
   return (
-    <article className="max-w-225 flex">
-      <div className="w-50 min-h-50">
-        <img
-          className="w-ful h-full"
-          src={image.url.replace("https://www.superherodb.com", "/images")}
-          alt={name}
-        />
+    <article className="max-w-225 flex m-2 ">
+      <div className="w-50 max-h-70">
+        <img className="w-ful h-full" src={images.sm} alt={name} />
       </div>
       <div className="flex flex-col gap-2.5 shrink-0">
         <p className="font-outfit text-lg text-white">{name}</p>
