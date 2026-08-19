@@ -1,39 +1,28 @@
 import { useEffect, useRef, useState } from "react";
-import useFetchCharacters from "../services/useFetchCharacters";
 import CardInput from "./CardInput";
-import Loading from "./Loading";
 import type { Characters } from "../types/CharacterTypes";
+interface inputHeaderPorps {
+  charactersData: Characters[];
+}
 
-export default function InputHeader() {
+export default function InputHeader({ charactersData }: inputHeaderPorps) {
   const [input, setInput] = useState<string>("");
-  const { getSearchCharacters, searchLoading } = useFetchCharacters();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [searchCharacters, setSearchCharacters] = useState<Characters[]>([]);
-  const [status, setStatus] = useState<"initial" | "void" | "searching">(
-    "initial",
-  );
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (input.trim() === "" && searchCharacters.length === 0) {
-      return;
-    }
-    async function fetchSearchCharacters() {
-      setSearchCharacters([]);
-      setStatus("searching");
-      const data = await getSearchCharacters(input);
-      if (!data) {
-        console.log("abacaxi");
-        setStatus("void");
-        setSearchCharacters([]);
-        return;
-      }
-      if (data.results) {
-        setSearchCharacters(data.results);
-      }
-    }
-    fetchSearchCharacters();
-  }, [input]);
+  const filteredCharacters =
+    input.trim() === ""
+      ? []
+      : charactersData.filter((c) =>
+          c.name.toLowerCase().startsWith(input.toLowerCase()),
+        );
+
+  const status =
+    input.trim() === ""
+      ? "initial"
+      : filteredCharacters.length === 0
+        ? "void"
+        : "searching";
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
@@ -63,24 +52,28 @@ export default function InputHeader() {
         value={input}
         onChange={(e) => {
           setInput(e.currentTarget.value);
-          if (e.currentTarget.value.trim() === "") {
-            setStatus("initial");
-            setSearchCharacters([]);
-          }
         }}
         className=" w-full text-slate-400 p-2.5 rounded-lg bg-gray-700"
         onClick={() => setIsOpen(true)}
       />
       {isOpen && (
-        <div className="bg-slate-600 h-137.5 w-full absolute px-6 py-2.5 overflow-y-auto">
-          {status === "initial" && searchCharacters.length === 0
-            ? "Pesquise seu recruta"
-            : ""}
-          {status === "void" && "Parece que seu recruta fugiu :("}
-          {searchLoading && <Loading />}
-          {searchCharacters.length > 0 &&
-            searchCharacters.map((a) => (
-              <CardInput key={a.id} name={a.name} image={a.image} id={a.id} />
+        <div className="bg-slate-600 h-137.5 w-full absolute px-6 py-2.5 overflow-y-auto grid">
+          {status === "initial" && filteredCharacters.length === 0 ? (
+            <p className="font-bebas text-center self-center text-3xl text-slate-200">
+              Pesquise seu recruta
+            </p>
+          ) : (
+            ""
+          )}
+          {status === "void" && (
+            <p className="font-bebas text-center self-center text-3xl text-slate-200">
+              Parece que seu recruta fugiu :(
+            </p>
+          )}
+
+          {filteredCharacters.length > 0 &&
+            filteredCharacters.map((a) => (
+              <CardInput key={a.id} name={a.name} images={a.images} id={a.id} />
             ))}
         </div>
       )}
