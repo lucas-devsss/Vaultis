@@ -16,7 +16,7 @@ interface biography {
   alignment: alignment;
 }
 
-export type alignment = "good" | "bad" | "neutral" | "null";
+export type alignment = "good" | "bad" | "neutral" | "null" | "-";
 
 export interface images {
   xs: string;
