@@ -9,7 +9,7 @@ export default function BadgeComponent({
 }: BadgeComponentProps) {
   return (
     <div className="border-slate-700 border-2 p-2.5 text-sm text-center">
-      {content === "null" || content === "-" ? unknownContent : content}
+      {content === null || content === "-" ? unknownContent : content}
     </div>
   );
 }
