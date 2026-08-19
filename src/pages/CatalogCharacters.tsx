@@ -62,7 +62,7 @@ export function CatalogCharacters() {
   }
   return (
     <>
-      <CatalogHeader />
+      <CatalogHeader charactersData={charactersData} />
       <section className="px-8 pt-40 bg-slate-900 h-full min-h-dvh">
         <p className="text-slate-500 mb-2.5 font-outfit">
           Recrutas disponiveis
