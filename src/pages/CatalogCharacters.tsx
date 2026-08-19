@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import CardCharacter from "../components/CardCharacter";
-import { useRef } from "react";
 import useCharacter from "../hooks/useCharacter";
 import SkeletonCard from "../components/SkeletonCard";
 import CatalogHeader from "../components/CatalogHeader";
@@ -8,17 +7,11 @@ import CatalogHeader from "../components/CatalogHeader";
 export function CatalogCharacters() {
   const {
     loading,
-    loadingMore,
     charactersData,
-    isFetched,
-    isFetching,
     getCharacters,
-    getMoreCharacters,
-    setIsFetching,
-    loadNextIds,
+    characters,
+    loadMoreCharacters,
   } = useCharacter();
-
-  const targetRef = useRef(null);
 
   useEffect(() => {
     getCharacters();
@@ -27,29 +20,6 @@ export function CatalogCharacters() {
   const skelCardsRange = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ];
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !isFetching.current) {
-          setIsFetching(true);
-          loadNextIds(10);
-          getMoreCharacters().then(() => {
-            setIsFetching(false);
-          });
-        }
-      },
-      { threshold: 0.1 },
-    );
-    if (targetRef.current) {
-      observer.observe(targetRef.current);
-    }
-    return () => {
-      if (targetRef.current) {
-        observer.disconnect();
-      }
-    };
-  }, [isFetched]);
 
   if (loading) {
     return (
@@ -68,7 +38,7 @@ export function CatalogCharacters() {
           Recrutas disponiveis
         </p>
         <div className="grid gap-2.5 grid-cols-[repeat(auto-fit,minmax(150px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ">
-          {charactersData.map((a) => (
+          {characters.map((a) => (
             <CardCharacter
               key={a.id}
               name={a.name}
@@ -80,12 +50,15 @@ export function CatalogCharacters() {
             ></CardCharacter>
           ))}
         </div>
-        <div ref={targetRef} className="w-5 h-5"></div>
-        {loadingMore && (
-          <div className="w-25 h-25">
-            <p>Carregando...</p>
-          </div>
-        )}
+
+        <div className="w-full h-28 flex justify-center items-center">
+          <button
+            className="font-bebas text-[22px] tracking-wider px-10 py-3.5 border-[1.5px] border-blue-400 text-blue-400 rounded-md bg-transparent hover:bg-blue-400 hover:text-slate-900 transition-all duration-150 active:scale-98 cursor-pointer"
+            onClick={() => loadMoreCharacters(20)}
+          >
+            Carregar mais
+          </button>
+        </div>
       </section>
     </>
   );
