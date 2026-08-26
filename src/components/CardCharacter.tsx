@@ -1,6 +1,7 @@
 import type { Characters } from "../types/CharacterTypes";
 import BadgeComponent from "./BadgeComponent";
 import AlignmentBadge from "./AlignmentBadge";
+import LinkData from "./LinkData";
 export default function CardCharacter({
   name,
   id,
@@ -9,7 +10,6 @@ export default function CardCharacter({
   connections,
   appearance,
 }: Characters) {
-  console.log(id);
   return (
     <article className=" flex flex-col max-h-175 bg-slate-800 text-white box-border">
       <div className="w-full max-h-70 shrink-0">
@@ -36,9 +36,7 @@ export default function CardCharacter({
             <button className="px-6 py-4 font-bebas text-2xl bg-red-700 border-3 border-transparent duration-150 hover:border-yellow-300 cursor-pointer">
               Recrutar
             </button>
-            <button className="px-6 py-4 font-bebas text-xl border-3 border-red-700 hover:bg-yellow-300 hover:text-red-900 hover:border-red-900 duration-150 cursor-pointer">
-              Ver dados
-            </button>
+            <LinkData characterId={id} />
           </div>
         </div>
       </div>
