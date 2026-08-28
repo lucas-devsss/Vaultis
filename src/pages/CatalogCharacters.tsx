@@ -5,13 +5,8 @@ import SkeletonCard from "../components/SkeletonCard";
 import CatalogHeader from "../components/CatalogHeader";
 
 export function CatalogCharacters() {
-  const {
-    loading,
-    charactersData,
-    getCharacters,
-    characters,
-    loadMoreCharacters,
-  } = useCharacter();
+  const { loading, getCharacters, characters, loadMoreCharacters } =
+    useCharacter();
 
   useEffect(() => {
     getCharacters();
@@ -32,7 +27,7 @@ export function CatalogCharacters() {
   }
   return (
     <>
-      <CatalogHeader charactersData={charactersData} />
+      <CatalogHeader />
       <section className="px-8 pt-40 bg-slate-900 h-full min-h-dvh">
         <p className="text-slate-500 mb-2.5 font-outfit">
           Recrutas disponiveis
@@ -47,6 +42,7 @@ export function CatalogCharacters() {
               images={a.images}
               connections={a.connections}
               appearance={a.appearance}
+              work={a.work}
             ></CardCharacter>
           ))}
         </div>
