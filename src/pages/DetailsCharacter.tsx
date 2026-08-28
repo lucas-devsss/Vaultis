@@ -4,13 +4,12 @@ import useFetchCharacters from "../services/useFetchCharacters";
 import type { Characters } from "../types/CharacterTypes";
 import DetailsHeader from "../components/DetailsHeader";
 import AlignmentBadge from "../components/AlignmentBadge";
+import FieldInfo from "../components/FieldInfo";
 
 function DetailsCharacter() {
   const paramsId = useParams();
-  const { getCharacterDetails, loadingId, getFetchCharacters } =
-    useFetchCharacters();
+  const { getCharacterDetails, loadingId } = useFetchCharacters();
   const [characterDetails, setCharacterDetails] = useState<Characters>();
-  const [characters, setCharacters] = useState<Characters[]>();
 
   useEffect(() => {
     async function getDetails() {
@@ -23,17 +22,6 @@ function DetailsCharacter() {
         console.error(e);
       }
     }
-    async function getCharacters() {
-      try {
-        const data = await getFetchCharacters();
-        if (data) {
-          setCharacters(data);
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    getCharacters();
     getDetails();
   }, [paramsId]);
 
@@ -41,10 +29,10 @@ function DetailsCharacter() {
   if (loadingId) {
     return <h1>Is loading...</h1>;
   }
-  if (characterDetails && characters) {
+  if (characterDetails) {
     return (
       <>
-        <DetailsHeader charactersData={characters} />
+        <DetailsHeader />
         <section className="px-8 py-50 bg-slate-900 min-h-dvh flex flex-col gap-8 md:flex-row">
           <div className="w-full max-w-112.5 max-h-137.5 self-center md:self-auto">
             <img
@@ -71,71 +59,44 @@ function DetailsCharacter() {
                 unknownContent="Status desconhecido"
               />
             </div>
-            <div className="border-y-2 border-slate-400 mt-2">
-              <div>
-                <p className="text-slate-500 font-bebas text-2xl">Codinomes</p>
-                <p className="text-slate-300 text-[20px] mb-1.5 border-b-2 border-slate-400">
-                  {characterDetails.biography.alterEgos}
-                </p>
-              </div>
-              <div>
-                <p className="text-slate-500 font-bebas text-2xl ">Gênero</p>
-                <p className="text-slate-300 text-[20px] mb-2 border-b-2 border-slate-400">
-                  {characterDetails.appearance.gender}
-                </p>
-              </div>
-              <div>
-                <p className="text-slate-500 font-bebas text-2xl">Raça</p>
-                <p className="text-slate-300 text-[20px] mb-2 border-b-2 border-slate-400">
-                  {characterDetails.appearance.race}
-                </p>
-              </div>
-              <div>
-                <p className="text-slate-500 font-bebas text-2xl">
-                  Nome Completo
-                </p>
-                <p className="text-slate-300 text-[20px] mb-2 border-b-2 border-slate-400">
-                  {characterDetails.biography.fullName}
-                </p>
-              </div>
-              <div>
-                <p className="text-slate-500 font-bebas text-2xl">
-                  Local de Nascimento
-                </p>
-                <p className="text-slate-300 text-[20px] mb-2 border-b-2 border-slate-400">
-                  {characterDetails.biography.placeOfBirth}
-                </p>
-              </div>
-              <div>
-                <p className="text-slate-500 font-bebas text-2xl">
-                  Primeira Aparição
-                </p>
-                <p className="text-slate-300 text-[20px] mb-2 border-b-2 border-slate-400">
-                  {characterDetails.biography.firstAppearance}
-                </p>
-              </div>
-              <div>
-                <p className="text-slate-500 font-bebas text-2xl">
-                  Grupo Afiliado
-                </p>
-                <p className="text-slate-300 text-[20px] mb-2 border-b-2 border-slate-400">
-                  {characterDetails.connections.groupAffiliation}
-                </p>
-              </div>
-              <div>
-                <p className="text-slate-500 font-bebas text-2xl">
-                  Base de Operações
-                </p>
-                <p className="text-slate-300 text-[20px] mb-2 border-b-2 border-slate-400">
-                  {characterDetails.work.base}
-                </p>
-              </div>
-              <div>
-                <p className="text-slate-500 font-bebas text-2xl">Trabalhos</p>
-                <p className="text-slate-300 text-[20px] mb-2">
-                  {characterDetails.work.occupation}
-                </p>
-              </div>
+            <div className="border-t-2 border-slate-400 mt-2">
+              <FieldInfo
+                title="alter egos"
+                content={characterDetails.biography.alterEgos}
+              />
+              <FieldInfo
+                title="gender"
+                content={characterDetails.appearance.gender}
+              />
+              <FieldInfo
+                title="race"
+                content={characterDetails.appearance.race}
+              />
+              <FieldInfo
+                title="full name"
+                content={characterDetails.biography.fullName}
+              />
+              <FieldInfo
+                title="place of birth"
+                content={characterDetails.biography.placeOfBirth}
+              />
+
+              <FieldInfo
+                title="first appearance"
+                content={characterDetails.biography.firstAppearance}
+              />
+              <FieldInfo
+                title="group affiliation"
+                content={characterDetails.connections.groupAffiliation}
+              />
+              <FieldInfo
+                title="work base"
+                content={characterDetails.work.base}
+              />
+              <FieldInfo
+                title="occupations"
+                content={characterDetails.work.occupation}
+              />
             </div>
           </div>
         </section>
