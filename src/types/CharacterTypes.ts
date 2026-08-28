@@ -5,12 +5,13 @@ export interface Characters {
   images: images;
   connections: connections;
   appearance: appearance;
+  work: work;
 }
 
 interface biography {
   fullName: string;
   alterEgos: string;
-  placeBirth: string;
+  placeOfBirth: string;
   firstAppearance: string;
   publisher: string;
   alignment: alignment;
@@ -31,4 +32,10 @@ interface connections {
 
 interface appearance {
   race: string;
+  gender: string;
+}
+
+interface work {
+  occupation: string;
+  base: string;
 }
