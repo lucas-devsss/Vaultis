@@ -1,19 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 import CardInput from "./CardInput";
 import type { Characters } from "../types/CharacterTypes";
-interface inputHeaderPorps {
-  charactersData: Characters[];
-}
+import useFetchCharacters from "../services/useFetchCharacters";
 
-export default function InputHeader({ charactersData }: inputHeaderPorps) {
+export default function InputHeader() {
   const [input, setInput] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [CharactersData, setCharactersData] = useState<Characters[]>([]);
+  const { getFetchCharacters } = useFetchCharacters();
+
+  useEffect(() => {
+    async function getCharacters() {
+      const data = await getFetchCharacters();
+      if (data) {
+        setCharactersData(data);
+      }
+    }
+    getCharacters();
+  }, []);
 
   const filteredCharacters =
     input.trim() === ""
       ? []
-      : charactersData.filter((c) =>
+      : CharactersData.filter((c) =>
           c.name.toLowerCase().startsWith(input.toLowerCase()),
         );
 
