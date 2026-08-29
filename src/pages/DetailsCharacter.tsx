@@ -25,7 +25,6 @@ function DetailsCharacter() {
     getDetails();
   }, [paramsId]);
 
-  console.log(characterDetails);
   if (loadingId) {
     return <h1>Is loading...</h1>;
   }
