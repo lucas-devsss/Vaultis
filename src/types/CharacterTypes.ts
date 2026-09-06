@@ -8,7 +8,7 @@ export interface Characters {
   work: work;
 }
 
-interface biography {
+export interface biography {
   fullName: string;
   alterEgos: string;
   placeOfBirth: string;
@@ -26,16 +26,16 @@ export interface images {
   lg: string;
 }
 
-interface connections {
+export interface connections {
   groupAffiliation: string;
 }
 
-interface appearance {
+export interface appearance {
   race: string;
   gender: string;
 }
 
-interface work {
+export interface work {
   occupation: string;
   base: string;
 }
