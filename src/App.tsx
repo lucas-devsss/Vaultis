@@ -2,18 +2,48 @@
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import { CatalogCharacters } from "./pages/CatalogCharacters";
 import DetailsCharacter from "./pages/DetailsCharacter";
+import useCharacter from "./hooks/useCharacter";
+import { CharacterContext } from "./context/characterContext";
 
 function App() {
+  const {
+    loading,
+    getCharacters,
+    characters,
+    loadMoreCharacters,
+    addFavoriteCharacter,
+    favoritesCharacter,
+    removeFavoriteCharacter,
+  } = useCharacter();
+
   return (
     <>
-      <BrowserRouter>
-        <Outlet></Outlet>
+      <CharacterContext.Provider
+        value={{
+          addFavoriteCharacter,
+          removeFavoriteCharacter,
+          favoritesCharacter,
+        }}
+      >
+        <BrowserRouter>
+          <Outlet></Outlet>
 
-        <Routes>
-          <Route path="/" Component={CatalogCharacters}></Route>
-          <Route path=":id" Component={DetailsCharacter} />
-        </Routes>
-      </BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <CatalogCharacters
+                  loadMoreCharacters={loadMoreCharacters}
+                  loading={loading}
+                  characters={characters}
+                  getCharacters={getCharacters}
+                />
+              }
+            ></Route>
+            <Route path=":id" element={<DetailsCharacter />} />
+          </Routes>
+        </BrowserRouter>
+      </CharacterContext.Provider>
     </>
   );
 }
