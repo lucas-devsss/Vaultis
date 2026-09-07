@@ -82,9 +82,7 @@ export default function InputHeader() {
           )}
 
           {filteredCharacters.length > 0 &&
-            filteredCharacters.map((a) => (
-              <CardInput key={a.id} name={a.name} images={a.images} id={a.id} />
-            ))}
+            filteredCharacters.map((a) => <CardInput character={a} />)}
         </div>
       )}
     </div>
