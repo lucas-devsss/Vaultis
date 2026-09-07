@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import useFetchCharacters from "../services/useFetchCharacters";
 import type { Characters } from "../types/CharacterTypes";
 import DetailsHeader from "../components/DetailsHeader";
 import AlignmentBadge from "../components/AlignmentBadge";
 import FieldInfo from "../components/FieldInfo";
+import RecruitButton from "../components/RecruitButton";
+import { CharacterContext } from "../context/characterContext";
 
 function DetailsCharacter() {
   const paramsId = useParams();
   const { getCharacterDetails, loadingId } = useFetchCharacters();
   const [characterDetails, setCharacterDetails] = useState<Characters>();
+  const { addFavoriteCharacter, removeFavoriteCharacter, favoritesCharacter } =
+    useContext(CharacterContext);
 
   useEffect(() => {
     async function getDetails() {
@@ -45,9 +49,18 @@ function DetailsCharacter() {
               <p className="font-bebas text-[60px] text-white text-center">
                 {characterDetails.name}
               </p>
-              <button className="px-6 py-4 font-bebas w-full max-w-50 text-2xl bg-red-700 border-3 border-transparent duration-150 hover:border-yellow-300 cursor-pointer">
-                Recrutar
-              </button>
+
+              {favoritesCharacter.some((a) => characterDetails.id === a.id) ? (
+                <RecruitButton
+                  onDesrecruit={() =>
+                    removeFavoriteCharacter(characterDetails.id)
+                  }
+                />
+              ) : (
+                <RecruitButton
+                  onRecruit={() => addFavoriteCharacter(characterDetails)}
+                />
+              )}
             </div>
             <div className="flex gap-2.5 justify-center items-center md:justify-start">
               <p className="font-bebas text-[40px] text-slate-200">
