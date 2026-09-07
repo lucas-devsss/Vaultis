@@ -1,13 +1,22 @@
 import { useEffect } from "react";
 import CardCharacter from "../components/CardCharacter";
-import useCharacter from "../hooks/useCharacter";
+
 import SkeletonCard from "../components/SkeletonCard";
 import CatalogHeader from "../components/CatalogHeader";
+import type { Characters } from "../types/CharacterTypes";
+interface CatalogCharactersProps {
+  loading: boolean;
+  characters: Characters[];
+  loadMoreCharacters(value: number): void;
+  getCharacters(): void;
+}
 
-export function CatalogCharacters() {
-  const { loading, getCharacters, characters, loadMoreCharacters } =
-    useCharacter();
-
+export function CatalogCharacters({
+  loading,
+  getCharacters,
+  characters,
+  loadMoreCharacters,
+}: CatalogCharactersProps) {
   useEffect(() => {
     getCharacters();
   }, []);
@@ -42,7 +51,7 @@ export function CatalogCharacters() {
               images={a.images}
               connections={a.connections}
               appearance={a.appearance}
-              work={a.work}
+              page={"catalog"}
             ></CardCharacter>
           ))}
         </div>
