@@ -4,6 +4,7 @@ import { CatalogCharacters } from "./pages/CatalogCharacters";
 import DetailsCharacter from "./pages/DetailsCharacter";
 import useCharacter from "./hooks/useCharacter";
 import { CharacterContext } from "./context/characterContext";
+import FavoritesCharacters from "./pages/FavoritesCharacters";
 
 function App() {
   const {
@@ -41,6 +42,7 @@ function App() {
               }
             ></Route>
             <Route path=":id" element={<DetailsCharacter />} />
+            <Route path="recruits" Component={FavoritesCharacters} />
           </Routes>
         </BrowserRouter>
       </CharacterContext.Provider>
