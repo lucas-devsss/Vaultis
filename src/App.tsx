@@ -5,6 +5,7 @@ import DetailsCharacter from "./pages/DetailsCharacter";
 import useCharacter from "./hooks/useCharacter";
 import { CharacterContext } from "./context/characterContext";
 import FavoritesCharacters from "./pages/FavoritesCharacters";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const {
@@ -43,6 +44,7 @@ function App() {
             ></Route>
             <Route path=":id" element={<DetailsCharacter />} />
             <Route path="recruits" Component={FavoritesCharacters} />
+            <Route path="*" Component={NotFound} />
           </Routes>
         </BrowserRouter>
       </CharacterContext.Provider>
