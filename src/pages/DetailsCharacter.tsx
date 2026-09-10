@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useFetchCharacters from "../services/useFetchCharacters";
 import type { Characters } from "../types/CharacterTypes";
 import DetailsHeader from "../components/DetailsHeader";
@@ -14,12 +14,15 @@ function DetailsCharacter() {
   const [characterDetails, setCharacterDetails] = useState<Characters>();
   const { addFavoriteCharacter, removeFavoriteCharacter, favoritesCharacter } =
     useContext(CharacterContext);
-
+  const navigate = useNavigate();
   useEffect(() => {
     async function getDetails() {
       try {
         if (paramsId.id) {
           const data = await getCharacterDetails(paramsId.id);
+          if (!data) {
+            navigate("/character/not-found");
+          }
           setCharacterDetails(data);
         }
       } catch (e) {
