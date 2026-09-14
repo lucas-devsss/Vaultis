@@ -13,7 +13,7 @@ export default function RecruitButton({
         onClick={onDesrecruit}
         className="px-6 py-4 font-bebas text-white text-xl  bg-red-700 border-3 border-transparent duration-150 hover:border-yellow-300 cursor-pointer"
       >
-        Desrecrutar
+        Decruit
       </button>
     );
   }
@@ -24,7 +24,7 @@ export default function RecruitButton({
         onClick={onRecruit}
         className="px-6 py-4 font-bebas text-2xl text-white bg-red-700 border-3 border-transparent duration-150 hover:border-yellow-300 cursor-pointer"
       >
-        Recrutar
+        Recruit
       </button>
     );
   }

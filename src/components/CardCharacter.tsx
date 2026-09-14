@@ -45,15 +45,15 @@ export default function CardCharacter({
             <div className="flex flex-col gap-3">
               <AlignmentBadge
                 content={biography.alignment}
-                unknownContent={"Status desconhecido"}
+                unknownContent={"Alignment not found"}
               />
               <BadgeComponent
                 content={connections["groupAffiliation"].split(/[,;]+/)[0]}
-                unknownContent="Grupo desconhecido"
+                unknownContent="Group not found"
               />
               <BadgeComponent
                 content={appearance.race}
-                unknownContent="Raça desconhecida"
+                unknownContent="Race not found"
               />
             </div>
             <div className="flex flex-col gap-2.5 shrink-0">
@@ -71,7 +71,7 @@ export default function CardCharacter({
       <div className="flex flex-col min-h-175 max-h-175 justify-center p-2.5 gap-1.5 bg-slate-800">
         <p className="text-white flex flex-col text-center">
           <span>{name}</span>
-          <span className="font-bold">Já recrutado</span>
+          <span className="font-bold">Already recruited</span>
         </p>
         <RecruitButton onDesrecruit={() => removeFavoriteCharacter(id)} />
         <LinkData characterId={id} />
@@ -90,15 +90,15 @@ export default function CardCharacter({
           <div className="flex flex-col gap-3">
             <AlignmentBadge
               content={biography.alignment}
-              unknownContent={"Status desconhecido"}
+              unknownContent={"Alignment not found"}
             />
             <BadgeComponent
               content={connections["groupAffiliation"].split(/[,;]+/)[0]}
-              unknownContent="Grupo desconhecido"
+              unknownContent="Group not found"
             />
             <BadgeComponent
               content={appearance.race}
-              unknownContent="Raça desconhecida"
+              unknownContent="Race not found"
             />
           </div>
           <div className="flex flex-col gap-2.5 shrink-0">

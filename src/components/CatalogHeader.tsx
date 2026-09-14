@@ -15,7 +15,7 @@ export default function CatalogHeader() {
         to="/recruits"
         className="px-6 py-3 max-w-62.5 text-sm font-outfit uppercase bg-gray-700 text-white box-border border-4 duration-300 rounded-md border-transparent hover:border-red-500 hover:text-red-500 cursor-pointer"
       >
-        meus recrutas ({favoritesCharacter.length})
+        My Recruits ({favoritesCharacter.length})
       </Link>
     </HeaderComponent>
   );

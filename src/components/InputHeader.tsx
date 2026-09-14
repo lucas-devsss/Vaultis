@@ -57,7 +57,7 @@ export default function InputHeader() {
       <input
         type="text"
         name=""
-        placeholder="Pesquisar personagens"
+        placeholder="Search characters"
         id=""
         value={input}
         onChange={(e) => {
@@ -70,14 +70,14 @@ export default function InputHeader() {
         <div className="bg-slate-600 h-137.5 w-full absolute px-6 py-2.5 overflow-y-auto grid">
           {status === "initial" && filteredCharacters.length === 0 ? (
             <p className="font-bebas text-center self-center text-3xl text-slate-200">
-              Pesquise seu recruta
+              Search for recruits
             </p>
           ) : (
             ""
           )}
           {status === "void" && (
             <p className="font-bebas text-center self-center text-3xl text-slate-200">
-              Parece que seu recruta fugiu :(
+              Recruit not found :/
             </p>
           )}
 

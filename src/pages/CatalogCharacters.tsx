@@ -38,9 +38,7 @@ export function CatalogCharacters({
     <>
       <CatalogHeader />
       <section className="px-8 pt-40 bg-slate-900 h-full min-h-dvh">
-        <p className="text-slate-500 mb-2.5 font-outfit">
-          Recrutas disponiveis
-        </p>
+        <p className="text-slate-500 mb-2.5 font-outfit">Available Recruits</p>
         <div className="grid gap-2.5 grid-cols-[repeat(auto-fit,minmax(150px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ">
           {characters.map((a) => (
             <CardCharacter
@@ -61,7 +59,7 @@ export function CatalogCharacters({
             className="font-bebas text-[22px] tracking-wider px-10 py-3.5 border-[1.5px] border-blue-400 text-blue-400 rounded-md bg-transparent hover:bg-blue-400 hover:text-slate-900 transition-all duration-150 active:scale-98 cursor-pointer"
             onClick={() => loadMoreCharacters(20)}
           >
-            Carregar mais
+            Load More
           </button>
         </div>
       </section>
