@@ -2,11 +2,11 @@ import { Link } from "react-router";
 
 export default function NotFound() {
   return (
-    <section className="h-dvh w-dvw bg-slate-950 flex flex-col md:flex-row-reverse md:justify-around md:items-center  p-10 box-border">
+    <section className="h-dvh w-dvw bg-slate-950 flex flex-col md:flex-row-reverse md:justify-around md:items-center  p-10 ">
       <div>
         <img src="/error404.svg" alt="" width={600} />
       </div>
-      <div className="box-border">
+      <div>
         <p className="font-bebas text-white text-5xl">
           Ops, it seems you're lost
         </p>
@@ -15,7 +15,7 @@ export default function NotFound() {
         </p>
         <Link
           to={"/"}
-          className=" box-border inline-block mt-3 px-4 py-5 bg-purple-700 text-white font-inter text-2xl"
+          className=" inline-block mt-4 px-8 py-4 font-bebas text-2xl text-white bg-purple-700 rounded-md shadow-lg shadow-fuchsia-800/40 duration-300 hover:bg-purple-500 hover:shadow-fuchsia-500/70 active:scale-95 cursor-pointer"
         >
           Search for recruits
         </Link>

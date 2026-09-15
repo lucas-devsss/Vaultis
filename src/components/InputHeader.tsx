@@ -63,7 +63,7 @@ export default function InputHeader() {
         onChange={(e) => {
           setInput(e.currentTarget.value);
         }}
-        className=" w-full text-slate-400 p-2.5 rounded-lg bg-gray-700"
+        className=" w-full text-slate-400 p-2.5 rounded-lg bg-gray-700 border-3 border-transparent duration-150 hover:border-slate-500 focus:border-purple-700 outline-none"
         onClick={() => setIsOpen(true)}
       />
       {isOpen && (
