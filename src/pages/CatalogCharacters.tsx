@@ -27,11 +27,14 @@ export function CatalogCharacters({
 
   if (loading) {
     return (
-      <div className="bg-slate-900 px-8 py-2 h-full min-h-dvh grid gap-2.5 grid-cols-[repeat(auto-fit,minmax(150px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ">
-        {skelCardsRange.map((a) => (
-          <SkeletonCard key={a} />
-        ))}
-      </div>
+      <>
+        <CatalogHeader />
+        <div className="bg-slate-900  pt-40 px-8 py-2 h-full min-h-dvh grid gap-2.5 grid-cols-[repeat(auto-fit,minmax(150px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ">
+          {skelCardsRange.map((a) => (
+            <SkeletonCard key={a} />
+          ))}
+        </div>
+      </>
     );
   }
   return (

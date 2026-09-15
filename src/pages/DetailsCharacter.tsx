@@ -7,6 +7,7 @@ import AlignmentBadge from "../components/AlignmentBadge";
 import FieldInfo from "../components/FieldInfo";
 import RecruitButton from "../components/RecruitButton";
 import { CharacterContext } from "../context/characterContext";
+import SkeletonDetails from "../components/SkeletonDetails";
 
 function DetailsCharacter() {
   const paramsId = useParams();
@@ -33,7 +34,7 @@ function DetailsCharacter() {
   }, [paramsId]);
 
   if (loadingId) {
-    return <h1>Is loading...</h1>;
+    return <SkeletonDetails />;
   }
   if (characterDetails) {
     return (
