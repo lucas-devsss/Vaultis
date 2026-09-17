@@ -6,12 +6,20 @@ export default function NotFound() {
       <div>
         <img src="/error404.svg" alt="" width={600} />
       </div>
-      <div>
+      <div className="max-w-100">
         <p className="font-bebas text-white text-5xl">
-          Ops, it seems you're lost
+          SIGNAL LOST IN THE MULTIVERSE
         </p>
-        <p className="font-inter text-slate-300 text-xl">
-          Click below to return recruiting more recruits
+        <p className="font-inter text-slate-300 text-xl flex flex-col">
+          <span className="flex flex-col">
+            <strong className="text-purple-600 uppercase">observations</strong>{" "}
+            The coordinates you followed lead nowhere. This page isn't part of
+            any known dimension.
+          </span>
+          <span className="flex flex-col">
+            <strong className="text-purple-600 uppercase">orders</strong> Return
+            to base and start recruiting again.
+          </span>
         </p>
         <Link
           to={"/"}

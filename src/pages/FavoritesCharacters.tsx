@@ -19,11 +19,7 @@ export default function FavoritesCharacters() {
               alt=""
               className="w-80 m-auto"
             />
-            ;
-            <p className="text-slate-500 text-center">
-              It seems you don't have recruits :(
-            </p>
-            ;
+            <p className="text-slate-500 text-center">No one recruited yet</p>
           </>
         )}
         {favoritesCharacter.length >= 1 && (

@@ -57,7 +57,7 @@ export default function InputHeader() {
       <input
         type="text"
         name=""
-        placeholder="Search characters"
+        placeholder="Search recruits"
         id=""
         value={input}
         onChange={(e) => {
@@ -77,7 +77,7 @@ export default function InputHeader() {
           )}
           {status === "void" && (
             <p className="font-bebas text-center self-center text-3xl text-slate-200">
-              Recruit not found :/
+              Recruit not located :/
             </p>
           )}
 
