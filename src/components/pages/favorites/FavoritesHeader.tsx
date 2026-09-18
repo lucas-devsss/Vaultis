@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import HeaderComponent from "./Header";
-import InputHeader from "./InputHeader";
+import HeaderComponent from "../../common/Header";
+import InputHeader from "../../common/InputHeader";
 
 export default function FavoritesHeader() {
   return (

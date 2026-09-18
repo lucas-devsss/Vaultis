@@ -1,21 +1,23 @@
-import HeaderComponent from "./Header";
-import InputHeader from "./InputHeader";
 import { Link } from "react-router";
-import { CharacterContext } from "../context/characterContext";
+import HeaderComponent from "../../common/Header";
+import InputHeader from "../../common/InputHeader";
+import { CharacterContext } from "../../../context/characterContext";
 import { useContext } from "react";
 
-export default function CatalogHeader() {
+export default function DetailsHeader() {
   const { favoritesCharacter } = useContext(CharacterContext);
 
   return (
     <HeaderComponent>
-      <h1 className="font-bebas text-4xl text-white">Vaultis</h1>
+      <Link to={"/"} className="font-bebas text-white text-2xl ">
+        Recrutar
+      </Link>
       <InputHeader />
       <Link
-        to="/recruits"
+        to={"/recruits"}
         className="px-6 py-3 max-w-62.5 text-sm font-outfit uppercase bg-gray-700 text-white box-border border-4 duration-300 rounded-md border-transparent hover:border-red-500 hover:text-red-500 cursor-pointer"
       >
-        My Recruits ({favoritesCharacter.length})
+        meus recrutas ({favoritesCharacter.length})
       </Link>
     </HeaderComponent>
   );

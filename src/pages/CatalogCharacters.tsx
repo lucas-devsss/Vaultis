@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import CardCharacter from "../components/CardCharacter";
-
-import SkeletonCard from "../components/SkeletonCard";
-import CatalogHeader from "../components/CatalogHeader";
+import CardCharacter from "../components/character/CardCharacter";
+import SkeletonCard from "../components/skeletons/SkeletonCard";
+import CatalogHeader from "../components/pages/catalog/CatalogHeader";
 import type { Characters } from "../types/CharacterTypes";
 interface CatalogCharactersProps {
   loading: boolean;

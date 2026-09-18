@@ -1,5 +1,5 @@
-import FavoritesHeader from "../components/FavoritesHeader";
-import CardCharacter from "../components/CardCharacter";
+import FavoritesHeader from "../components/pages/favorites/FavoritesHeader";
+import CardCharacter from "../components/character/CardCharacter";
 import { useContext } from "react";
 import { CharacterContext } from "../context/characterContext";
 

@@ -2,12 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import useFetchCharacters from "../services/useFetchCharacters";
 import type { Characters } from "../types/CharacterTypes";
-import DetailsHeader from "../components/DetailsHeader";
-import AlignmentBadge from "../components/AlignmentBadge";
-import FieldInfo from "../components/FieldInfo";
-import RecruitButton from "../components/RecruitButton";
+import DetailsHeader from "../components/pages/details/DetailsHeader";
+import AlignmentBadge from "../components/character/AlignmentBadge";
+import FieldInfo from "../components/character/FieldInfo";
+import RecruitButton from "../components/common/RecruitButton";
 import { CharacterContext } from "../context/characterContext";
-import SkeletonDetails from "../components/SkeletonDetails";
+import SkeletonDetails from "../components/skeletons/SkeletonDetails";
 
 function DetailsCharacter() {
   const paramsId = useParams();

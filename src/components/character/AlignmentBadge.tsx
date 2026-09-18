@@ -1,4 +1,4 @@
-import type { alignment } from "../types/CharacterTypes";
+import type { alignment } from "../../types/CharacterTypes";
 
 interface AlignmentBadgeProps {
   content: alignment;

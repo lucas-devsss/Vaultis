@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import CardInput from "./CardInput";
-import type { Characters } from "../types/CharacterTypes";
-import useFetchCharacters from "../services/useFetchCharacters";
+import CardInput from "../character/CardInput";
+import type { Characters } from "../../types/CharacterTypes";
+import useFetchCharacters from "../../services/useFetchCharacters";
 
 export default function InputHeader() {
   const [input, setInput] = useState<string>("");

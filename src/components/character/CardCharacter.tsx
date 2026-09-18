@@ -1,15 +1,15 @@
 import BadgeComponent from "./BadgeComponent";
 import AlignmentBadge from "./AlignmentBadge";
-import LinkData from "./LinkData";
+import LinkData from "../common/LinkData";
 import type {
   images,
   appearance,
   connections,
   biography,
   Characters,
-} from "../types/CharacterTypes";
-import RecruitButton from "./RecruitButton";
-import { CharacterContext } from "../context/characterContext";
+} from "../../types/CharacterTypes";
+import RecruitButton from "../common/RecruitButton";
+import { CharacterContext } from "../../context/characterContext";
 import { useContext } from "react";
 
 interface CardCharacterProps {

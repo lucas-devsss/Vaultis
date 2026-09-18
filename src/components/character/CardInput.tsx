@@ -1,8 +1,8 @@
-import type { Characters } from "../types/CharacterTypes";
-import LinkData from "./LinkData";
+import type { Characters } from "../../types/CharacterTypes";
+import LinkData from "../common/LinkData";
 import { useContext } from "react";
-import { CharacterContext } from "../context/characterContext";
-import RecruitButton from "./RecruitButton";
+import { CharacterContext } from "../../context/characterContext";
+import RecruitButton from "../common/RecruitButton";
 
 interface CardInputProps {
   character: Characters;
