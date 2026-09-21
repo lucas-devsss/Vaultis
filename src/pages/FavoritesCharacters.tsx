@@ -10,13 +10,13 @@ export default function FavoritesCharacters() {
     <>
       <FavoritesHeader />
       <section className="px-8 pt-40 pb-8 bg-slate-900 h-full min-h-dvh">
-        <p className="text-slate-500 mb-2.5 font-outfit">Your recruits</p>
+        <p className="text-slate-500 mb-30 font-outfit">Your recruits</p>
 
         {favoritesCharacter.length === 0 && (
           <>
             <img
               src="src/assets/noFavorites.png"
-              alt=""
+              alt="folder with a sad face"
               className="w-80 m-auto"
             />
             <p className="text-slate-500 text-center">No one recruited yet</p>

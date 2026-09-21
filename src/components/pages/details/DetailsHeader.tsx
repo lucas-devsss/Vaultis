@@ -3,21 +3,26 @@ import HeaderComponent from "../../common/Header";
 import InputHeader from "../../common/InputHeader";
 import { CharacterContext } from "../../../context/characterContext";
 import { useContext } from "react";
+import { MoveLeft } from "lucide-react";
 
 export default function DetailsHeader() {
   const { favoritesCharacter } = useContext(CharacterContext);
 
   return (
     <HeaderComponent>
-      <Link to={"/"} className="font-bebas text-white text-2xl ">
-        Recrutar
+      <Link
+        to={"/"}
+        className="font-bebas text-white text-2xl duration-150 hover:text-yellow-300 active:scale-95 "
+      >
+        Go back to recruit
+        <MoveLeft />
       </Link>
       <InputHeader />
       <Link
         to={"/recruits"}
         className="px-6 py-3 max-w-62.5 text-sm font-outfit uppercase bg-gray-700 text-white box-border border-4 duration-300 rounded-md border-transparent hover:border-red-500 hover:text-red-500 cursor-pointer"
       >
-        meus recrutas ({favoritesCharacter.length})
+        My recruits ({favoritesCharacter.length})
       </Link>
     </HeaderComponent>
   );
