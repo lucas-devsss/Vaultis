@@ -10,11 +10,11 @@ export default function AlignmentBadge({
   unknownContent,
 }: AlignmentBadgeProps) {
   const alignmentStyles = {
-    good: "p-2.5 bg-blue-400 text-center",
-    bad: "p-2.5 bg-red-700 text-center",
-    neutral: "p-2.5 bg-slate-400 text-center",
-    null: "p-2.5 bg-slate-700 text-center",
-    "-": "p-2.5 bg-slate-700 text-center",
+    good: "p-2.5 bg-blue-400 text-center text-white",
+    bad: "p-2.5 bg-red-700 text-center text-white",
+    neutral: "p-2.5 bg-slate-400 text-center text-white",
+    null: "p-2.5 bg-slate-700 text-center text-white",
+    "-": "p-2.5 bg-slate-700 text-center text-white",
   };
   return (
     <div className={alignmentStyles[content]}>
