@@ -30,7 +30,7 @@ export default function useCharacter() {
     setFavoritesCharacter((prev) => [...prev, character]);
   }
 
-  function removeFavoriteCharacter(id: string) {
+  function removeFavoriteCharacter(id: number) {
     setFavoritesCharacter((prev) => prev.filter((a) => a.id !== id));
   }
 

@@ -18,7 +18,7 @@ export default function AlignmentBadge({
   };
   return (
     <div className={alignmentStyles[content]}>
-      {content === null || content === "-" ? unknownContent : content}
+      {content === "null" || content === "-" ? unknownContent : content}
     </div>
   );
 }

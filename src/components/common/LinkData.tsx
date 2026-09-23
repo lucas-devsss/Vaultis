@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 
 interface LinkDataProps {
-  characterId: string;
+  characterId: number;
 }
 
 export default function LinkData({ characterId }: LinkDataProps) {

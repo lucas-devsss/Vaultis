@@ -43,16 +43,7 @@ export function CatalogCharacters({
         <p className="text-slate-500 mb-2.5 font-outfit">Available Recruits</p>
         <div className="grid gap-2.5 grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
           {characters.map((a) => (
-            <CardCharacter
-              key={a.id}
-              name={a.name}
-              id={a.id}
-              biography={a.biography}
-              images={a.images}
-              connections={a.connections}
-              appearance={a.appearance}
-              page={"catalog"}
-            ></CardCharacter>
+            <CardCharacter key={a.id} character={a} page={"catalog"} />
           ))}
         </div>
 

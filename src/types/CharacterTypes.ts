@@ -1,6 +1,6 @@
 export interface Characters {
   name: string;
-  id: string;
+  id: number;
   biography: biography;
   images: images;
   connections: connections;

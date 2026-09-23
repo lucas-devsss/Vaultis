@@ -3,7 +3,7 @@ import type { Characters } from "../types/CharacterTypes";
 
 interface CharacterContext {
   favoritesCharacter: Characters[];
-  removeFavoriteCharacter(id: string): void;
+  removeFavoriteCharacter(id: number): void;
   addFavoriteCharacter(character: Characters): void;
 }
 

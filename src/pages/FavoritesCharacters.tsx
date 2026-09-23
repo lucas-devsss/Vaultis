@@ -25,16 +25,7 @@ export default function FavoritesCharacters() {
         {favoritesCharacter.length >= 1 && (
           <div className="grid gap-2.5 grid-cols-[repeat(auto-fit,minmax(150px,150px))] ">
             {favoritesCharacter.map((a) => (
-              <CardCharacter
-                key={a.id}
-                name={a.name}
-                id={a.id}
-                biography={a.biography}
-                images={a.images}
-                connections={a.connections}
-                appearance={a.appearance}
-                page={"favorites"}
-              ></CardCharacter>
+              <CardCharacter key={a.id} character={a} page={"favorites"} />
             ))}
           </div>
         )}

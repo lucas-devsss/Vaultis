@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { Characters } from "../types/CharacterTypes";
 
 export default function useFetchCharacters() {
   const [loading, setLoading] = useState(true);
@@ -6,7 +7,7 @@ export default function useFetchCharacters() {
   const [characterError, setCharacterError] = useState<string | null>(null);
   const [detailsErrorMsg, setDetailsErrorMsg] = useState<string | null>(null);
 
-  async function getFetchCharacters() {
+  async function getFetchCharacters(): Promise<Characters[]> {
     try {
       setLoading(true);
       setCharacterError(null);
@@ -16,17 +17,18 @@ export default function useFetchCharacters() {
       if (!response.ok) {
         throw new Error("Failed to load characters");
       }
-      const data = await response.json();
+      const data = (await response.json()) as Characters[];
       return data;
     } catch (e) {
       console.log(e);
       setCharacterError("Something went wrong while loading characters.");
+      return [];
     } finally {
       setLoading(false);
     }
   }
 
-  async function getCharacterDetails(id: string) {
+  async function getCharacterDetails(id: number): Promise<Characters | null> {
     try {
       setLoadingId(true);
       setDetailsErrorMsg(null);
@@ -42,7 +44,7 @@ export default function useFetchCharacters() {
         }
         throw new Error("Failed to load character");
       }
-      const data = await response.json();
+      const data = (await response.json()) as Characters;
       return data;
     } catch (e) {
       console.log(e);

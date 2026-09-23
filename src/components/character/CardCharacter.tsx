@@ -1,36 +1,18 @@
 import BadgeComponent from "./BadgeComponent";
 import AlignmentBadge from "./AlignmentBadge";
 import LinkData from "../common/LinkData";
-import type {
-  images,
-  appearance,
-  connections,
-  biography,
-  Characters,
-} from "../../types/CharacterTypes";
+import type { Characters } from "../../types/CharacterTypes";
 import RecruitButton from "../common/RecruitButton";
 import { CharacterContext } from "../../context/characterContext";
 import { useContext } from "react";
 
 interface CardCharacterProps {
-  name: string;
-  id: string;
-  biography: biography;
-  images: images;
-  connections: connections;
-  appearance: appearance;
+  character: Characters;
   page: "favorites" | "catalog";
 }
 
-export default function CardCharacter({
-  name,
-  id,
-  biography,
-  images,
-  connections,
-  appearance,
-  page,
-}: CardCharacterProps) {
+export default function CardCharacter({ character, page }: CardCharacterProps) {
+  const { name, id, biography, images, connections, appearance } = character;
   const { addFavoriteCharacter, removeFavoriteCharacter, favoritesCharacter } =
     useContext(CharacterContext);
   if (page === "favorites") {
@@ -102,18 +84,7 @@ export default function CardCharacter({
             />
           </div>
           <div className="flex flex-col gap-2.5 shrink-0">
-            <RecruitButton
-              onRecruit={() =>
-                addFavoriteCharacter({
-                  name,
-                  id,
-                  biography,
-                  images,
-                  connections,
-                  appearance,
-                } as Characters)
-              }
-            />
+            <RecruitButton onRecruit={() => addFavoriteCharacter(character)} />
             <LinkData characterId={id} />
           </div>
         </div>

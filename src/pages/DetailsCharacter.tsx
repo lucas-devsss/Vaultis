@@ -14,7 +14,9 @@ function DetailsCharacter() {
   const paramsId = useParams();
   const { getCharacterDetails, loadingId, detailsErrorMsg } =
     useFetchCharacters();
-  const [characterDetails, setCharacterDetails] = useState<Characters | null>();
+  const [characterDetails, setCharacterDetails] = useState<Characters | null>(
+    null,
+  );
   const { addFavoriteCharacter, removeFavoriteCharacter, favoritesCharacter } =
     useContext(CharacterContext);
 
@@ -22,7 +24,7 @@ function DetailsCharacter() {
     async function getDetails() {
       try {
         if (paramsId.id) {
-          const data = await getCharacterDetails(paramsId.id);
+          const data = await getCharacterDetails(Number(paramsId.id));
           setCharacterDetails(data);
         }
       } catch (e) {
