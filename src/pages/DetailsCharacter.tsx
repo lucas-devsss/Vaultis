@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import useFetchCharacters from "../services/useFetchCharacters";
 import type { Characters } from "../types/CharacterTypes";
 import DetailsHeader from "../components/pages/details/DetailsHeader";
@@ -8,34 +8,38 @@ import FieldInfo from "../components/character/FieldInfo";
 import RecruitButton from "../components/common/RecruitButton";
 import { CharacterContext } from "../context/characterContext";
 import SkeletonDetails from "../components/skeletons/SkeletonDetails";
+import DetailsError from "../components/pages/details/DetailsError";
 
 function DetailsCharacter() {
   const paramsId = useParams();
-  const { getCharacterDetails, loadingId } = useFetchCharacters();
-  const [characterDetails, setCharacterDetails] = useState<Characters>();
+  const { getCharacterDetails, loadingId, detailsErrorMsg } =
+    useFetchCharacters();
+  const [characterDetails, setCharacterDetails] = useState<Characters | null>();
   const { addFavoriteCharacter, removeFavoriteCharacter, favoritesCharacter } =
     useContext(CharacterContext);
-  const navigate = useNavigate();
+
   useEffect(() => {
     async function getDetails() {
       try {
         if (paramsId.id) {
           const data = await getCharacterDetails(paramsId.id);
-          if (!data) {
-            navigate("/character/not-found");
-          }
           setCharacterDetails(data);
         }
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
     }
     getDetails();
   }, [paramsId]);
 
+  if (detailsErrorMsg) {
+    return <DetailsError message={detailsErrorMsg} />;
+  }
+
   if (loadingId) {
     return <SkeletonDetails />;
   }
+
   if (characterDetails) {
     return (
       <>
