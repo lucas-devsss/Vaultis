@@ -4,7 +4,7 @@ export default function useFetchCharacters() {
   const [loading, setLoading] = useState(true);
   const [loadingId, setLoadingId] = useState(false);
   const [characterError, setCharacterError] = useState<string | null>(null);
-  const [DetailsErrorMsg, setDetailsErrorMsg] = useState<string | null>(null);
+  const [detailsErrorMsg, setDetailsErrorMsg] = useState<string | null>(null);
 
   async function getFetchCharacters() {
     try {
@@ -59,6 +59,6 @@ export default function useFetchCharacters() {
     getCharacterDetails,
     loadingId,
     characterError,
-    DetailsErrorMsg,
+    detailsErrorMsg,
   };
 }
