@@ -1,7 +1,5 @@
 # 🦸 Vaultis
 
-> ⚠️ Projeto em desenvolvimento ativo — este README reflete o estado atual e será atualizado conforme novas features forem concluídas.
-
 ---
 
 ## 🧩 Sobre o projeto
@@ -22,25 +20,17 @@ O Vaultis é uma aplicação web SPA que consome a [Akabab Superhero API](https:
 
 ## 📋 Funcionalidades
 
-### ✅ Concluídas
-
 - Catálogo com todos os personagens da API, carregado aos poucos conforme o usuário clica em "Carregar mais"
 - Busca de personagem por nome através de barra de pesquisa no header
 - Indicador de carregamento enquanto os dados da API são buscados
 - Página de detalhes individual de cada personagem
-
-### 🚧 Em andamento
-
 - Funcionalidade de recrutar/desrecrutar personagens
 - Página de Favoritos
-- Persistência para salvar os favoritos
-
-### 📝 Planejadas para o MVP
-
-- Filtro de personagens por alinhamento (Good/Bad/Neutral) e por editora
-- Página inicial/missão com fundo animado em Canvas
-- Página 404 para rotas inexistentes
 - Persistência dos favoritos no localStorage
+- Página 404 para rotas inexistentes
+- Tratamento de erros de requisição, com tela de erro dedicada na página de detalhes
+- Estado global de favoritos via Context API (CharacterContext), eliminando o prop drilling
+- Componentes organizados por responsabilidade (comuns, de personagem, de loading e por página)
 
 ---
 
@@ -59,30 +49,48 @@ O Vaultis é uma aplicação web SPA que consome a [Akabab Superhero API](https:
 
 ```
 📂 src/
+ ┣ 📜 App.tsx
+ ┣ 📂 assets/
+ ┃ ┗ 🖼️ noFavorites.png
  ┣ 📂 components/
- ┃ ┣ 📜 CardCharacter
- ┃ ┣ 📜 CardInput
- ┃ ┣ 📜 SkeletonCard
- ┃ ┣ 📜 AlignmentBadge
- ┃ ┣ 📜 BadgeComponent
- ┃ ┣ 📜 InfoComponent
- ┃ ┣ 📜 LinkData
- ┃ ┣ 📜 Loading
- ┃ ┣ 📜 Header
- ┃ ┣ 📜 CatalogHeader
- ┃ ┣ 📜 DetailsHeader
- ┃ ┗ 📜 InputHeader
+ ┃ ┣ 📂 character/
+ ┃ ┃ ┣ 📜 AlignmentBadge.tsx
+ ┃ ┃ ┣ 📜 BadgeComponent.tsx
+ ┃ ┃ ┣ 📜 CardCharacter.tsx
+ ┃ ┃ ┣ 📜 CardInput.tsx
+ ┃ ┃ ┗ 📜 FieldInfo.tsx
+ ┃ ┣ 📂 common/
+ ┃ ┃ ┣ 📜 Header.tsx
+ ┃ ┃ ┣ 📜 InputHeader.tsx
+ ┃ ┃ ┣ 📜 LinkData.tsx
+ ┃ ┃ ┗ 📜 RecruitButton.tsx
+ ┃ ┣ 📂 pages/
+ ┃ ┃ ┣ 📂 catalog/
+ ┃ ┃ ┃ ┗ 📜 CatalogHeader.tsx
+ ┃ ┃ ┣ 📂 details/
+ ┃ ┃ ┃ ┣ 📜 DetailsError.tsx
+ ┃ ┃ ┃ ┗ 📜 DetailsHeader.tsx
+ ┃ ┃ ┗ 📂 favorites/
+ ┃ ┃ ┃ ┗ 📜 FavoritesHeader.tsx
+ ┃ ┗ 📂 skeletons/
+ ┃ ┃ ┣ 📜 SkeletonCard.tsx
+ ┃ ┃ ┗ 📜 SkeletonDetails.tsx
+ ┣ 📂 context/
+ ┃ ┗ 📜 characterContext.tsx
  ┣ 📂 hooks/
  ┃ ┗ 📜 useCharacter.ts
+ ┣ 📜 index.css
+ ┣ 📜 main.tsx
  ┣ 📂 pages/
- ┃ ┣ 📜 CatalogCharacters
- ┃ ┣ 📜 DetailsCharacter
- ┃ ┗ 📜 FavoritesCharacters
+ ┃ ┣ 📜 CatalogCharacters.tsx
+ ┃ ┣ 📜 DetailsCharacter.tsx
+ ┃ ┣ 📜 FavoritesCharacters.tsx
+ ┃ ┗ 📜 NotFound.tsx
  ┣ 📂 services/
+ ┃ ┣ 📜 storage.ts
  ┃ ┗ 📜 useFetchCharacters.ts
- ┣ 📂 types/
- ┗ ┗ 📜 CharacterTypes.ts
-
+ ┗ 📂 types/
+ ┃ ┗ 📜 CharacterTypes.ts
 ```
 
 ---
@@ -100,25 +108,42 @@ Inicialmente, a renderização de novos personagens seria feita via infinite scr
 **Context API ante a Prop Drilling**
 Inicialmente, o projeto adotou totalmente a passagem de dados e funções via prop drilling entre os componentes. No entanto, conforme a aplicação cresceu e novos componentes passaram a consumir os mesmos dados, essa abordagem se tornou repetitiva, cansativa e de difícil manutenção ao longo de múltiplos níveis hierárquicos. Para resolver esse gargalo de escalabilidade, escolhi utilizar a Context API, centralizando o acesso aos dados globais.
 
+**Tratamento de erro na página de detalhes**
+
+Inicialmente, qualquer falha ao buscar os dados de um personagem (seja erro de requisição, seja um personagem inexistente) resultava em um redirecionamento para a página 404, tirando o usuário do contexto em que ele estava. Para melhorar a experiência, essa abordagem foi substituída pela renderização de um componente de erro (`DetailsError`) diretamente na página de detalhes, mantendo o header visível — assim o usuário continua com acesso à busca e aos seus recrutas favoritados, podendo tentar novamente sem precisar voltar ao catálogo.
+
 ---
+
 
 ## 🏗️ Arquitetura
 
-A lógica da aplicação é concentrada em hooks customizados, mantendo os componentes focados na camada visual:
+A lógica da aplicação é concentrada em hooks customizados e em um Context global, mantendo os componentes focados na camada visual:
 
 - **`useCharacter`** — gerencia o estado central dos personagens: lista completa (`charactersData`), lista paginada exibida (`characters`), favoritos (`favoritesCharacter`) e a função de adicionar/remover favorito (`addFavoriteCharacter`)
-- **`useFetchCharacters`** — isola a chamada à Akabab Superhero API (`getFetchCharacters`) e expõe o estado de carregamento (`loading`)
-- Os componentes de página (`CatalogCharacters`, `DetailsCharacter`, `FavoritesCharacters`) consomem esses hooks e distribuem dados e funções via props para os componentes visuais, como `CardCharacter`, `CardInput` e `InputHeader`.
+- **`useFetchCharacters`** — isola as chamadas à Akabab Superhero API (`getFetchCharacters`, `getCharacterDetails`) e expõe os estados de carregamento (`loading`, `loadingId`) e de erro (`characterError`, `detailsErrorMsg`)
+- **`CharacterContext`** — disponibiliza globalmente `favoritesCharacter`, `addFavoriteCharacter` e `removeFavoriteCharacter`, evitando prop drilling especificamente para a lógica de favoritos. Componentes como `CardCharacter`, `CardInput` e `DetailsCharacter` consomem o Context para saber se um personagem já foi recrutado e para disparar a ação de recrutar/desrecrutar, enquanto os demais dados do personagem (nome, imagem, biografia etc.) continuam sendo recebidos via props normalmente
+- **`storage.ts`** — camada de persistência responsável por salvar e recuperar os favoritos do localStorage
 
 ---
 
 ## 🧠 Aprendizados
 
 - **Consumo de API em escala** — lidar com uma base de 731 personagens carregada de uma vez e derivar paginação e busca localmente a partir dela
-- **Hooks customizados** — separar a lógica de dados (`useCharacter`, `useFetchCharacters`) da camada visual dos componentes
+  
+- **Hooks customizados e seu escopo** — separar a lógica de dados (`useCharacter`, `useFetchCharacters`) da camada visual dos componentes, e entender na prática que cada instância de um hook customizado é independente: dois componentes chamando o mesmo hook não compartilham estado entre si, do mesmo jeito que instâncias de uma classe não compartilham propriedades
+  
 - **Tipagem com TypeScript** — modelar os tipos dos personagens vindos da API (campos em camelCase, estrutura de imagens)
-- **Identificação de débitos técnicos** — reconhecer na prática quando prop drilling e requisições redundantes pedem uma solução como Context API, mesmo antes de implementá-la
-- **Planejamento de MVP** — separar o que já está pronto, o que está em andamento e o que é essencial para considerar o projeto entregável
+  
+- **Context API como solução, não só como problema identificado** — entender que, quando várias informações semelhantes são consumidas por componentes diferentes via prop drilling, a Context API simplifica bastante a manutenção; e que vale a pena avaliar antes mesmo de começar um projeto se a estrutura de dados pede prop drilling ou Context API desde o início
+  
+- **Roteamento e estados de erro** — renderizar dados individuais a partir de uma rota dinâmica (`:id`), e evoluir de um tratamento simples (redirecionar para 404 em qualquer falha) para renderizar um componente de erro específico, mantendo o usuário no contexto da página em vez de tirá-lo dela
+  
+- **Estados de loading para UX** — criar skeletons de carregamento para que o usuário entenda que algo está sendo processado, em vez de ver a tela travada ou em branco
+  
+- **Paginação local** — carregar mais personagens sob demanda a partir de um array já buscado, sem depender de novas requisições
+  
+- **Planejamento de escopo e gestão de risco técnico** — perceber que, antes de adicionar ou escalar uma feature, vale avaliar os recursos disponíveis e o custo de cortar algo caso não funcione; também aprender a reconhecer quando a dificuldade em implementar algo pode vir da ferramenta ou fonte de dados escolhida (como foi o caso da migração de API), e que vale investir tempo procurando uma alternativa mais simples de integrar em vez de insistir em uma peça que está gerando atrito constante
+
 
 ---
 
@@ -141,12 +166,6 @@ Inicie o servidor de desenvolvimento:
 ```bash
 npm run dev
 ```
-
----
-
-## 🧭 Roadmap
-
-Este é o repositório ativo do projeto — o README será atualizado conforme as funcionalidades planejadas forem implementadas, até o fechamento do MVP.
 
 ---
 
